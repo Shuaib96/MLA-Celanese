@@ -1,0 +1,32 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/spfx-serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://techoon.sharepoint.com/sites/SPFx/SitePages/Celanese.aspx",
+      "customActions": {
+        "cd11b419-42bd-4a1c-a2fa-4bd74e14a2f6": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    },
+    "header": {
+      "pageUrl": "https://techoon.sharepoint.com/sites/SPFx/SitePages/Celanese.aspx",
+      "customActions": {
+        "cd11b419-42bd-4a1c-a2fa-4bd74e14a2f6": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "Top": "Celanese",
+            "Bottom": "Footer",
+            "TopDescription": "The chemistry inside innovation",
+            "logoImg": "http://drive.google.com/uc?export=view&id=10TAcL5sPfXfl2gdTBhrSxc2NZ311AAfy"
+          }
+        }
+      }
+    }
+  }
+}

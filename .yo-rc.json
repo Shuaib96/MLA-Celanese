@@ -1,0 +1,17 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.15.2",
+    "libraryName": "mla-celanese",
+    "libraryId": "c35016a3-0328-438d-8ee9-751f0b7cb9f2",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "MLA-Celanese",
+    "solutionShortDescription": "MLA-Celanese description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "extension",
+    "extensionType": "ApplicationCustomizer"
+  }
+}
