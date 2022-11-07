@@ -1,0 +1,21 @@
+#pageHeader{
+    display: none;
+}
+#spLeftNav{
+    display: none;
+}
+.ms-TooltipHost{
+    display: none !important;
+}
+.webPartContainer{
+    display: none;
+}
+#CommentsWrapper{
+    display: none;
+}
+#spSiteHeader{
+    display: none;
+}
+#sp-appBar{
+    display: none;
+}

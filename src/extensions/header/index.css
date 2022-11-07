@@ -1,0 +1,10 @@
+/* .ms-CommandBar-secondaryCommand {
+    position: absolute !important;
+    display: flex;
+    top: -36px !important;
+    right: 11px !important;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    align-items: stretch;
+    z-index: 20000;
+} */

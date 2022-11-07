@@ -6,12 +6,12 @@ import {
   PlaceholderName
 } from '@microsoft/sp-application-base';
 import { Dialog } from '@microsoft/sp-dialog';
-
+import './index.css';
 import styles from './styles.module.scss';
 
 import {
   SPHttpClient,
-  SPHttpClientResponse   
+  SPHttpClientResponse
 } from '@microsoft/sp-http';
 
 import {
@@ -19,7 +19,7 @@ import {
   EnvironmentType
 } from '@microsoft/sp-core-library';
 
-import {escape} from '@microsoft/sp-lodash-subset';
+import { escape } from '@microsoft/sp-lodash-subset';
 
 import * as strings from 'HeaderApplicationCustomizerStrings';
 const LOG_SOURCE: string = 'HeaderApplicationCustomizer';
@@ -44,12 +44,7 @@ export interface ISPLists {
 
 export interface ISPList {
   Title: string;
-  linked:  string;
-  CustomID: string;
-  Sorting: number;
-  levels: number;
-  Id: number;
-  parentsId: number;
+  link: string;
 }
 
 
@@ -57,59 +52,59 @@ export interface ISPList {
 export default class HeaderApplicationCustomizer
   extends BaseApplicationCustomizer<IHeaderApplicationCustomizerProperties> {
 
-    private _topPlaceholder: PlaceholderContent | undefined;
-    private _bottomPlaceholder: PlaceholderContent | undefined;
+  private _topPlaceholder: PlaceholderContent | undefined;
+  private _bottomPlaceholder: PlaceholderContent | undefined;
 
-    
-//to get the  data for Api list items
-private _getListData(): Promise<ISPLists> {
-  return this.context.spHttpClient.get(this.context.pageContext.web.absoluteUrl + "/_api/web/lists/getbytitle('Navigation List')/items",SPHttpClient.configurations.v1)
+
+  //to get the  data for Api list items
+  private _getListData(): Promise<ISPLists> {
+    return this.context.spHttpClient.get(this.context.pageContext.web.absoluteUrl + "/_api/web/lists/getbytitle('Navigation MLA')/items", SPHttpClient.configurations.v1)
       .then((response: SPHttpClientResponse) => {
-      return response.json();
-      });     
+        return response.json();
+      });
   }
 
-private _renderListAsync(): void {
-  
-    if (Environment.type == EnvironmentType.SharePoint || 
-             Environment.type == EnvironmentType.ClassicSharePoint) {
-     this._getListData()
-       .then((response) => {
-         this._renderList(response.value);
-       });
-   }
- }
+  private _renderListAsync(): void {
 
- 
+    if (Environment.type == EnvironmentType.SharePoint ||
+      Environment.type == EnvironmentType.ClassicSharePoint) {
+      this._getListData()
+        .then((response) => {
+          this._renderList(response.value);
+        });
+    }
+  }
 
- //To store the data into te Html list
- private _renderList(items: ISPList[]): void {
 
-  //Change Json Format
-  const list = items;
 
-  
-console.log("listlist", list)
-  //Navigation Bar
-  let html: string = `<ul class="${styles.Navigation}" id="ParenrtNav">`;
-  list.forEach((item) => {
-    html += `          
+  //To store the data into te Html list
+  private _renderList(items: ISPList[]): void {
+
+    //Change Json Format
+    const list = items;
+
+
+    console.log("listlist", list)
+    //Navigation Bar
+    let html: string = `<ul class="${styles.Navigation}" id="ParenrtNav">`;
+    list.forEach((item) => {
+      html += `          
        <li class="${styles.drop}">
-       <a href=${item.linked}><div class="${styles.navigationList}">${item.Title}</div>
+       <a href=${item.link}><div class="${styles.navigationList}">${item.Title}</div>
        </li>
         `;
-  });
-  html += '</ul>';
+    });
+    html += '</ul>';
 
 
 
-  const listContainer: Element = document.getElementById('navigationBarList');
-  listContainer.innerHTML = html;
+    const listContainer: Element = document.getElementById('navigationList');
+    listContainer.innerHTML = html;
 
 
-}
+  }
 
-@override
+  @override
 
   public onInit(): Promise<void> {
     Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
@@ -127,16 +122,16 @@ console.log("listlist", list)
     this._renderListAsync();
     return Promise.resolve();
   }
-  
+
   private _renderPlaceHolders(): void {
     // console.log('Available placeholders are : ',
     // this.context.placeholderProvider.placeholderNames.map(placeholdername =>PlaceholderName[placeholdername]).join(', '));
-  
+
     if (!this._topPlaceholder) {
-      this._topPlaceholder = 
-      this.context.placeholderProvider.tryCreateContent(
-        PlaceholderName.Top,
-        { onDispose: this._onDispose});
+      this._topPlaceholder =
+        this.context.placeholderProvider.tryCreateContent(
+          PlaceholderName.Top,
+          { onDispose: this._onDispose });
 
       if (!this._topPlaceholder) {
         console.error('The placeholder Top was not found...');
@@ -147,14 +142,14 @@ console.log("listlist", list)
         let topString: string = this.properties.Top;
         let topStringDescription: string = this.properties.TopDescription;
         let logoImage: string = this.properties.logoImg;
-          if(!topString) {
-            topString = 'PerFormance Metrics Dashboard';
-            topStringDescription = 'MANUFACTURING';
-            logoImage = require('./assets/Logo.png');
-          }
+        if (!topString) {
+          topString = 'PerFormance Metrics Dashboard';
+          topStringDescription = 'MANUFACTURING';
+          logoImage = require('./assets/Logo.png');
+        }
 
-          if(this._topPlaceholder.domElement) {
-            this._topPlaceholder.domElement.innerHTML= `
+        if (this._topPlaceholder.domElement) {
+          this._topPlaceholder.domElement.innerHTML = `
             <div class="${styles.acdemoapp}">
             <div class="${styles.header}">
             <div class="${styles.headertitle}">
@@ -165,21 +160,21 @@ console.log("listlist", list)
             </div>
             </div>
             </div>
-            <div  id="navigationBarList">
+            <div  id="navigationList">
             </div>
             </div>
             </div>
             `;
-          }
+        }
 
       }
     }
-    
+
     if (!this._bottomPlaceholder) {
-      this._bottomPlaceholder = 
-      this.context.placeholderProvider.tryCreateContent(
-        PlaceholderName.Bottom,
-        { onDispose: this._onDispose});
+      this._bottomPlaceholder =
+        this.context.placeholderProvider.tryCreateContent(
+          PlaceholderName.Bottom,
+          { onDispose: this._onDispose });
 
       if (!this._bottomPlaceholder) {
         console.error('The placeholder bottom was not found...');
@@ -188,24 +183,24 @@ console.log("listlist", list)
 
       if (this.properties) {
         let bottomString: string = this.properties.Bottom;
-          if(!bottomString) {
-            bottomString = '(Bottom property was not defined...)';
-          }
+        if (!bottomString) {
+          bottomString = '(Bottom property was not defined...)';
+        }
 
-          if(this._bottomPlaceholder.domElement) {
-            this._bottomPlaceholder.domElement.innerHTML= `
+        if (this._bottomPlaceholder.domElement) {
+          this._bottomPlaceholder.domElement.innerHTML = `
             <div class="${styles.acdemoapp}">
             <div class="ms-bgColor-themeDark ms-fontColor-white ${styles.bottomPlaceholder}">
             <i class="ms-Icon ms-Icon--Info" aria-hidden="true"></i>
             </div>
             </div>
             `;
-          }
+        }
 
       }
     }
-    
-  
+
+
   }
 
   private _onDispose(): void {
