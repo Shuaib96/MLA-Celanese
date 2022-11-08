@@ -36,7 +36,9 @@
       "headerFiveImg" : "https://techoon.sharepoint.com/sites/SPFx/Assets/Plant.png",
 
       "bgcolor": "#007143",
-      "InActivebgcolor": "#525156"
+      "InActivebgcolor": "#525156",
+
+      "display": "block"
     }
   }]
 }

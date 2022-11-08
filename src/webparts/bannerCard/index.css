@@ -4,9 +4,9 @@
 #spLeftNav{
     display: none;
 }
-.ms-TooltipHost{
+/* .ms-TooltipHost{
     display: none !important;
-}
+} */
 .webPartContainer{
     display: none;
 }

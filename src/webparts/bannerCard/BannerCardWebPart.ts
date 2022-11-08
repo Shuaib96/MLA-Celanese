@@ -47,6 +47,8 @@ export interface IBannerCardWebPartProps {
 
   //Background Color when it is change by PaneField without Hover
   InActivebgcolor: string;
+
+  display: string;
 }
 
 export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCardWebPartProps> {
@@ -126,6 +128,7 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
     this.domElement.querySelector('#CardButtonFour').addEventListener('mouseleave', () => {
       this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.backgroundColor = this.properties.InActivebgcolor;
     });
+    this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.display = this.properties.display
 
     // //For Change the Button color by the propertyPane
     // this.domElement.querySelector('#CardButton').addEventListener('mouseenter', () => {
@@ -306,6 +309,19 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
                   resizable: false,
                   deferredValidationTime: 5000,
                   placeholder: "Please enter image link", "description": "Header Name property field"
+                })
+              ]
+            },
+            {
+              groupName: "Display-5(box)",
+              groupFields: [
+
+                PropertyPaneTextField('display', {
+                  label: "Display",
+                  multiline: false,
+                  resizable: false,
+                  deferredValidationTime: 5000,
+                  placeholder: "Please enter display name", "description": "Display Name property field"
                 })
               ]
             },

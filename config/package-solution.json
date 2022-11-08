@@ -25,20 +25,21 @@
       "videoUrl": "",
       "categories": []
     },
-    "features": [
-      {
-        "title": "Application Extension - Deployment of custom action",
-        "description": "Deploys a custom action with ClientSideComponentId association",
-        "id": "e9a9a34c-828c-4e02-8ab9-f826f473814b",
-        "version": "1.0.0.0",
-        "assets": {
-          "elementManifests": [
-            "elements.xml",
-            "ClientSideInstance.xml"
-          ]
-        }
+    "features": [{
+      "title": "mla-navigation-list-client-side-solution",
+      "description": "mla-navigation-list-client-side-solution",
+      "id": "433d792a-ad6f-44d1-abd5-daf51307d491",
+      "version": "1.0.0.0",
+      "assets": {        
+        "elementManifests": [
+          "elements.xml",
+          "ClientSideInstance.xml"
+        ],
+        "elementFiles":[
+          "schema.xml"
+        ]
       }
-    ]
+    }]
   },
   "paths": {
     "zippedPackage": "solution/mla-celanese.sppkg"

@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-    <CustomAction
-        Title="Header"
-        Location="ClientSideExtension.ApplicationCustomizer"
-        ClientSideComponentId="cd11b419-42bd-4a1c-a2fa-4bd74e14a2f6"
-        ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
-    </CustomAction>
+<Field ID="{0f4511ac-abe2-440a-b248-9f27a31674a6}"
+            Name="NavigationName"
+            DisplayName="Navigation Name"
+            Type="Text"
+            Required="FALSE"
+            Group="MLANavigation" />
+<ContentType ID="0x01003149ea7d45674d83a284c27d30a9a9b3" 
+            Name="MLANavigationContentType" 
+            Group="MLANavigation Content Type" 
+            Description="This is the Content Type for Product Details">
+        <FieldRefs>
+            <FieldRef ID="{0f4511ac-abe2-440a-b248-9f27a31674a6}" /> 
+        </FieldRefs>
+</ContentType> 
+    <ListInstance 
+            CustomSchema="schema.xml"
+            FeatureId="00bfea71-de22-43b2-a848-c05709900100"
+            Title="MLA Navigation" 
+            Description="Product Details List created using SharePoint Framework"
+            TemplateType="100"
+            Url="Lists/MLANavigation">
+     </ListInstance>
 </Elements>
