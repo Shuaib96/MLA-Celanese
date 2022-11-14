@@ -1,8 +1,7 @@
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField,
-  PropertyPaneChoiceGroup
+  PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 
 
@@ -62,7 +61,7 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
 
   public render(): void {
     this.domElement.innerHTML = `
-     <div class="${styles.BannerCards}">
+     <div id="BannerContainer" class="${styles.BannerCards}">
         <div class="${styles.container}">
         <div class="${styles.bannerName}">${this.properties.bannerName}</div>
           <div class="${styles.main}">
@@ -95,7 +94,6 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
 
   private _setButtonEventHandlers(): void {
     const webPart: BannerCardWebPart = this;
-
     //For change background by the propertyPane
     this.domElement.querySelector('#CardButton').addEventListener('mouseenter', () => {
       this.domElement.querySelector<HTMLElement>("#CardButton").style.backgroundColor = this.properties.bgcolor;
@@ -128,64 +126,10 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
     this.domElement.querySelector('#CardButtonFour').addEventListener('mouseleave', () => {
       this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.backgroundColor = this.properties.InActivebgcolor;
     });
-    this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.display = this.properties.display
-
-    // //For Change the Button color by the propertyPane
-    // this.domElement.querySelector('#CardButton').addEventListener('mouseenter', () => {
-    //   this.domElement.querySelector<HTMLElement>("#btnColor").style.backgroundColor = this.properties.btncolor;
-    // });
-    // this.domElement.querySelector('#CardButton').addEventListener('mouseleave', () => {
-    //   this.domElement.querySelector<HTMLElement>("#btnColor").style.backgroundColor = this.properties.withouthoverbtncolor;
-    // });
-
-    // this.domElement.querySelector('#CardButtonOne').addEventListener('mouseenter', () => {
-    //   this.domElement.querySelector<HTMLElement>("#btnColor1").style.backgroundColor = this.properties.btncolor;
-    // });
-    // this.domElement.querySelector('#CardButtonOne').addEventListener('mouseleave', () => {
-    //   this.domElement.querySelector<HTMLElement>("#btnColor1").style.backgroundColor = this.properties.withouthoverbtncolor;
-    // });
-    // this.domElement.querySelector('#CardButtonTwo').addEventListener('mouseenter', () => {
-    //   this.domElement.querySelector<HTMLElement>("#btnColor2").style.backgroundColor = this.properties.btncolor;
-    // });
-    // this.domElement.querySelector('#CardButtonTwo').addEventListener('mouseleave', () => {
-    //   this.domElement.querySelector<HTMLElement>("#btnColor2").style.backgroundColor = this.properties.withouthoverbtncolor;
-    // });
+    this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.display = this.properties.display;
+    this.domElement.querySelector<HTMLElement>("#BannerContainer").style.width = `${window.innerWidth}px`;    
   }
 
-
-  // protected onInit(): Promise<void> {
-  //   this._environmentMessage = this._getEnvironmentMessage();
-
-  //   return super.onInit();
-  // }
-
-
-
-  // private _getEnvironmentMessage(): string {
-  //   if (!!this.context.sdks.microsoftTeams) { // running in Teams
-  //     return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentTeams : strings.AppTeamsTabEnvironment;
-  //   }
-
-  //   return this.context.isServedFromLocalhost ? strings.AppLocalEnvironmentSharePoint : strings.AppSharePointEnvironment;
-  // }
-
-  // protected onThemeChanged(currentTheme: IReadonlyTheme | undefined): void {
-  //   if (!currentTheme) {
-  //     return;
-  //   }
-
-  //   this._isDarkTheme = !!currentTheme.isInverted;
-  //   const {
-  //     semanticColors
-  //   } = currentTheme;
-
-  //   if (semanticColors) {
-  //     this.domElement.style.setProperty('--bodyText', semanticColors.bodyText || null);
-  //     this.domElement.style.setProperty('--link', semanticColors.link || null);
-  //     this.domElement.style.setProperty('--linkHovered', semanticColors.linkHovered || null);
-  //   }
-
-  // }
 
   protected get dataVersion(): Version {
     return Version.parse('1.0');

@@ -145,7 +145,7 @@ export default class HeaderApplicationCustomizer
         if (!topString) {
           topString = 'PerFormance Metrics Dashboard';
           topStringDescription = 'MANUFACTURING';
-          logoImage = require('./assets/Logo.png');
+          logoImage = require('./assets/MLALogo.png');
         }
 
         if (this._topPlaceholder.domElement) {

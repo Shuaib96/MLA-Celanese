@@ -19,7 +19,6 @@
     "@microsoft/sp-lodash-subset": "1.15.2",
     "@microsoft/sp-office-ui-fabric-core": "1.15.2",
     "@pnp/spfx-property-controls": "^3.2.0"
-    
   },
   "devDependencies": {
     "@microsoft/eslint-config-spfx": "1.15.2",
