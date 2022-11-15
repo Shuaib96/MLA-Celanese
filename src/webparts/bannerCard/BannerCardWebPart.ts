@@ -1,7 +1,8 @@
 import { Version } from '@microsoft/sp-core-library';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneChoiceGroup
 } from '@microsoft/sp-property-pane';
 
 
@@ -24,22 +25,27 @@ export interface IBannerCardWebPartProps {
   //Card 1
   headerOne: string;
   headerOneImg: string;
+  headerOneRedirect: string;
 
   //Card 2
   headerTwo: string;
   headerTwoImg: string;
+  headerTwoRedirect: string;
 
   //Card 3
   headerThree: string;
   headerThreeImg: string;
+  headerThreeRedirect: string;
 
   //Card 4
   headerFour: string;
   headerFourImg: string;
+  headerFourRedirect: string;
 
   //Card 5
   headerFive: string;
   headerFiveImg: string;
+  headerFiveRedirect: string;
 
   //Card and Button background when hover
   bgcolor: string;
@@ -48,6 +54,8 @@ export interface IBannerCardWebPartProps {
   InActivebgcolor: string;
 
   display: string;
+
+  activestate: string;
 }
 
 export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCardWebPartProps> {
@@ -65,26 +73,26 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
         <div class="${styles.container}">
         <div class="${styles.bannerName}">${this.properties.bannerName}</div>
           <div class="${styles.main}">
-          <div  id="CardButton" class="${styles.headerBox}">
+          <a href=${this.properties.headerOneRedirect}><div id="CardButton" class="${styles.headerBox}">
            <div class="${styles.imageHeader} "><img src=${this.properties.headerOneImg} alt="HeaderImage" /></div>
             <div class="${styles.headerLabel}"><p>${this.properties.headerOne}</p></div>
-          </div>
-          <div  id="CardButtonOne" class="${styles.headerBox} ">
+          </div></a>
+          <a href=${this.properties.headerTwoRedirect}><div id="CardButtonOne" class="${styles.headerBox} ">
            <div class="${styles.imageHeader} "><img src=${this.properties.headerTwoImg} alt="HeaderImage" /></div>
             <div class="${styles.headerLabel}"><p>${this.properties.headerTwo}</p></div>
-          </div>
-          <div id="CardButtonTwo" class="${styles.headerBox} ">
+          </div></a>
+          <a href=${this.properties.headerThreeRedirect}><div id="CardButtonTwo" class="${styles.headerBox} ">
            <div class="${styles.imageHeader} "><img src=${this.properties.headerThreeImg} alt="HeaderImage" /></div>
             <div class="${styles.headerLabel}"><p>${this.properties.headerThree}</p></div>
-          </div>
-          <div id="CardButtonThree" class="${styles.headerBox} ">
+          </div></a>
+          <a href=${this.properties.headerFourRedirect}><div id="CardButtonThree" class="${styles.headerBox} ">
            <div class="${styles.imageHeader} "><img src=${this.properties.headerFourImg} alt="HeaderImage" /></div>
             <div class="${styles.headerLabel}"><p>${this.properties.headerFour}</p></div>
-          </div>
-          <div id="CardButtonFour" class="${styles.headerBox} ">
+          </div></a>
+          <a href=${this.properties.headerFiveRedirect}><div id="CardButtonFour" class="${styles.headerBox} ">
            <div class="${styles.imageHeader} "><img src=${this.properties.headerFiveImg} alt="HeaderImage" /></div>
             <div class="${styles.headerLabel}"><p>${this.properties.headerFive}</p></div>
-          </div>
+          </div></a>
           </div>
         </div>
       </div>
@@ -99,34 +107,41 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
       this.domElement.querySelector<HTMLElement>("#CardButton").style.backgroundColor = this.properties.bgcolor;
     });
     this.domElement.querySelector('#CardButton').addEventListener('mouseleave', () => {
-      this.domElement.querySelector<HTMLElement>("#CardButton").style.backgroundColor = this.properties.InActivebgcolor;
+      this.domElement.querySelector<HTMLElement>("#CardButton").style.backgroundColor = this.properties.activestate == "one" ? this.properties.bgcolor : this.properties.InActivebgcolor;
     });
 
     this.domElement.querySelector('#CardButtonOne').addEventListener('mouseenter', () => {
       this.domElement.querySelector<HTMLElement>("#CardButtonOne").style.backgroundColor = this.properties.bgcolor;
     });
     this.domElement.querySelector('#CardButtonOne').addEventListener('mouseleave', () => {
-      this.domElement.querySelector<HTMLElement>("#CardButtonOne").style.backgroundColor = this.properties.InActivebgcolor;
+      this.domElement.querySelector<HTMLElement>("#CardButtonOne").style.backgroundColor = this.properties.activestate == "two" ? this.properties.bgcolor : this.properties.InActivebgcolor;
     });
     this.domElement.querySelector('#CardButtonTwo').addEventListener('mouseenter', () => {
       this.domElement.querySelector<HTMLElement>("#CardButtonTwo").style.backgroundColor = this.properties.bgcolor;
     });
     this.domElement.querySelector('#CardButtonTwo').addEventListener('mouseleave', () => {
-      this.domElement.querySelector<HTMLElement>("#CardButtonTwo").style.backgroundColor = this.properties.InActivebgcolor;
+      this.domElement.querySelector<HTMLElement>("#CardButtonTwo").style.backgroundColor = this.properties.activestate == "three" ? this.properties.bgcolor : this.properties.InActivebgcolor;
     });
     this.domElement.querySelector('#CardButtonThree').addEventListener('mouseenter', () => {
       this.domElement.querySelector<HTMLElement>("#CardButtonThree").style.backgroundColor = this.properties.bgcolor;
     });
     this.domElement.querySelector('#CardButtonThree').addEventListener('mouseleave', () => {
-      this.domElement.querySelector<HTMLElement>("#CardButtonThree").style.backgroundColor = this.properties.InActivebgcolor;
+      this.domElement.querySelector<HTMLElement>("#CardButtonThree").style.backgroundColor = this.properties.activestate == "four" ? this.properties.bgcolor : this.properties.InActivebgcolor;
     });
     this.domElement.querySelector('#CardButtonFour').addEventListener('mouseenter', () => {
       this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.backgroundColor = this.properties.bgcolor;
     });
     this.domElement.querySelector('#CardButtonFour').addEventListener('mouseleave', () => {
-      this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.backgroundColor = this.properties.InActivebgcolor;
+      this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.backgroundColor = this.properties.activestate == "five" ? this.properties.bgcolor : this.properties.InActivebgcolor;
     });
-    this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.display = this.properties.display; 
+    this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.display = this.properties.display;
+
+    this.domElement.querySelector<HTMLElement>("#CardButton").style.backgroundColor = this.properties.activestate == "one" ? this.properties.bgcolor : this.properties.InActivebgcolor;
+    this.domElement.querySelector<HTMLElement>("#CardButtonOne").style.backgroundColor = this.properties.activestate == "two" ? this.properties.bgcolor : this.properties.InActivebgcolor;
+    this.domElement.querySelector<HTMLElement>("#CardButtonTwo").style.backgroundColor = this.properties.activestate =="three" ? this.properties.bgcolor : this.properties.InActivebgcolor;
+    this.domElement.querySelector<HTMLElement>("#CardButtonThree").style.backgroundColor = this.properties.activestate == "four" ? this.properties.bgcolor : this.properties.InActivebgcolor;
+    this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.backgroundColor = this.properties.activestate == "five" ? this.properties.bgcolor : this.properties.InActivebgcolor;
+
   }
 
 
@@ -172,6 +187,13 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
                   resizable: false,
                   deferredValidationTime: 5000,
                   placeholder: "Please enter image link", "description": "Header Name property field"
+                }),
+                PropertyPaneTextField('headerOneRedirect', {
+                  label: "Redirect Link",
+                  multiline: false,
+                  resizable: false,
+                  deferredValidationTime: 5000,
+                  placeholder: "Please enter redirect link", "description": "Header Name property field"
                 })
               ]
             },
@@ -192,6 +214,13 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
                   resizable: false,
                   deferredValidationTime: 5000,
                   placeholder: "Please enter image link", "description": "Header Name property field"
+                }),
+                PropertyPaneTextField('headerTwoRedirect', {
+                  label: "Redirect Link",
+                  multiline: false,
+                  resizable: false,
+                  deferredValidationTime: 5000,
+                  placeholder: "Please enter redirect link", "description": "Header Name property field"
                 })
               ]
             },
@@ -212,6 +241,13 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
                   resizable: false,
                   deferredValidationTime: 5000,
                   placeholder: "Please enter image link", "description": "Header Name property field"
+                }),
+                PropertyPaneTextField('headerThreeRedirect', {
+                  label: "Redirect Link",
+                  multiline: false,
+                  resizable: false,
+                  deferredValidationTime: 5000,
+                  placeholder: "Please enter redirect link", "description": "Header Name property field"
                 })
               ]
             },
@@ -232,6 +268,13 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
                   resizable: false,
                   deferredValidationTime: 5000,
                   placeholder: "Please enter image link", "description": "Header Name property field"
+                }),
+                PropertyPaneTextField('headerFourRedirect', {
+                  label: "Redirect Link",
+                  multiline: false,
+                  resizable: false,
+                  deferredValidationTime: 5000,
+                  placeholder: "Please enter redirect link", "description": "Header Name property field"
                 })
               ]
             },
@@ -252,6 +295,13 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
                   resizable: false,
                   deferredValidationTime: 5000,
                   placeholder: "Please enter image link", "description": "Header Name property field"
+                }),
+                PropertyPaneTextField('headerFiveRedirect', {
+                  label: "Redirect Link",
+                  multiline: false,
+                  resizable: false,
+                  deferredValidationTime: 5000,
+                  placeholder: "Please enter redirect link", "description": "Header Name property field"
                 })
               ]
             },
@@ -296,6 +346,21 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
                   style: PropertyFieldColorPickerStyle.Full,
                   iconName: 'Precipitation',
                   key: 'colorFieldId'
+                })
+              ]
+            },
+            {
+              groupName: "Active State",
+              groupFields: [
+                PropertyPaneChoiceGroup('activestate', {
+                  label: 'Choices active card',
+                 options : [
+                  {key: 'one', text: 'Card-1'},
+                  {key: 'two', text: 'Card-2'},
+                  {key: 'three', text: 'Card-3'},
+                  {key: 'four', text: 'Card-4'},
+                  {key: 'five', text: 'Card-5'},
+                 ]
                 })
               ]
             }
