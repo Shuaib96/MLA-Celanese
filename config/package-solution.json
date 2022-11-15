@@ -1,9 +1,9 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "mla-celanese-client-side-solution",
+    "name": "mla-client-side-solution",
     "id": "c35016a3-0328-438d-8ee9-751f0b7cb9f2",
-    "version": "1.0.0.0",
+    "version": "4.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -16,32 +16,30 @@
     },
     "metadata": {
       "shortDescription": {
-        "default": "MLA-Celanese description"
+        "default": "MLA description"
       },
       "longDescription": {
-        "default": "MLA-Celanese description"
+        "default": "MLA description"
       },
       "screenshotPaths": [],
       "videoUrl": "",
       "categories": []
     },
-    "features": [{
-      "title": "mla-navigation-list-client-side-solution",
-      "description": "mla-navigation-list-client-side-solution",
-      "id": "433d792a-ad6f-44d1-abd5-daf51307d491",
-      "version": "1.0.0.0",
-      "assets": {        
-        "elementManifests": [
-          "elements.xml",
-          "ClientSideInstance.xml"
-        ],
-        "elementFiles":[
-          "schema.xml"
-        ]
-      }
+    "features": [
+      {
+        "title": "Application Extension - Deployment of custom action",
+        "description": "Deploys a custom action with ClientSideComponentId association",
+        "id": "e9a9a34c-828c-4e02-8ab9-f826f473814b",
+        "version": "4.0.0.0",
+        "assets": {
+          "elementManifests": [
+            "elements.xml",
+            "ClientSideInstance.xml"
+          ]
+        }
     }]
   },
   "paths": {
-    "zippedPackage": "solution/mla-celanese.sppkg"
+    "zippedPackage": "solution/mla.sppkg"
   }
 }

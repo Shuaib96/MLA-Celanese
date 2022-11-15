@@ -61,7 +61,7 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
 
   public render(): void {
     this.domElement.innerHTML = `
-     <div id="BannerContainer" class="${styles.BannerCards}">
+     <div class="${styles.BannerCards}">
         <div class="${styles.container}">
         <div class="${styles.bannerName}">${this.properties.bannerName}</div>
           <div class="${styles.main}">
@@ -126,8 +126,7 @@ export default class BannerCardWebPart extends BaseClientSideWebPart<IBannerCard
     this.domElement.querySelector('#CardButtonFour').addEventListener('mouseleave', () => {
       this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.backgroundColor = this.properties.InActivebgcolor;
     });
-    this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.display = this.properties.display;
-    this.domElement.querySelector<HTMLElement>("#BannerContainer").style.width = `${window.innerWidth}px`;    
+    this.domElement.querySelector<HTMLElement>("#CardButtonFour").style.display = this.properties.display; 
   }
 
 
